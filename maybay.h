@@ -8,7 +8,7 @@
 using namespace std;
 #define MAX_LIST_MB 300
 #define MAX_DAY 20
-#define MAX_y 50
+#define MAX_DONG 50
 #define MAX_VE 100
 const int cot =50;
 const int dong = 10;
@@ -144,6 +144,7 @@ void khung(int x, int y){
 	gotoxy(x,y+1);
 	cout<<"|_____________________________|";
 }
+//kiem tra ki tu dau la khoang trang: chua vviet
 
 //kiem tra chuoi rong
 int ktra_chuoi(string x){
@@ -235,7 +236,7 @@ void tenGhe(mayBay *mb){
     	for(int j=0;j<mb->so_day;j++){
 			for(int k=0;k<mb->so_dong;k++){
 				mb->ve.ten_ve[i] =ten_day[j] + to_string(k);
-//					cout<<mb->ve.ten_ve[i]<<"\t";
+					cout<<mb->ve.ten_ve[i]<<"\t";
 				i++;
 				mb->ve.n=i;	
 			}

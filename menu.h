@@ -42,7 +42,7 @@ char thucdon_cb [so_item_mb][50] = {"||> THEM CHUYEN BAY       ",
 char thucdon_hk [so_item_mb][50] = {"||> THEM HANH KHACH       ",
 			                  		   "||> SUA THONG TIN HANH KHACH    ",
 			                           "||> XOA HANH KHACH    ",
-			                           "||> DANH SACH HANH KHACH                ",
+			                           "||> DANH SACH HANH KHACH                 ",
 			                           "||> THOAT                   "};
 char thucdon_dscb [so_item_dscb][100] = {"||> DANH SACH TAT CA CHUYEN BAY     ",
 			                  		   "||> DANH SACH CHUYEN BAY CO CUNG NOI DEN && CUNG NGAY    ",
@@ -58,6 +58,7 @@ char thucdon_sua_cb[so_item_sua_cb][50]={"||> MA CHUYEN BAY            ",
 										"||> SO HIEU MAY BAY          ",
 										"||> TINH TRANG               " ,
 										"||> THOAT                     " };
+										
 char thucdon_yn[so_item_yn][50]={">> YES",
 								">> NO"};
 void Normal () {
@@ -477,6 +478,71 @@ void menu_mb(List_mb &l_mb){
 	   }
 	  } while (chon!=27);
 }
+void menu_hk(ListCB &l_cb, List_hk &l_hk, List_ve &l_ve){
+	int chon;
+	KhoiTaoCay(l_hk);
+	do{
+		chon= Menu( thucdon_hk,dong,cot+10);
+		system("cls");
+		switch(chon){
+			case 1:{
+				//them hanh khach
+				system("cls");
+				Normal();
+				hanhKhach hk= nhap_hk(l_hk);
+				InsertHanhKhach(l_hk,hk);
+				break;
+			}
+			case 2:{
+				system("cls");
+				Normal();
+				string x;
+				cout<<"NHAP CMND HANH KHACH CAN SUA:";
+				getline(cin,x);
+				sua_tt_hk(l_hk,x);
+				break;
+			}
+			case 3:{
+				system("cls");
+				Normal();
+				string x;
+				cout<<"NHAP CMND HANH KHACH CAN XOA:";
+				getline(cin,x);
+				xoa_1_hk(l_hk,x);
+				break;
+			}
+			case 4:{
+				system("cls");
+				Normal();
+				int l_chon;
+				cout<<"1. DANH SACH TOAN BO HANH KHACH";
+				cout<<"2. DANH SACH HANH KHACH THEO MA CHUYEN BAY";
+				do{
+					cin>>l_chon;
+					switch(l_chon){
+						case 1:{
+							system("cls");
+							xuat_DSHK(l_hk);
+							break;
+						}
+						case 2:{
+							system("cls");
+							string x;
+							cout<<"NHAP MA CHUYEN BAY";
+							getline(cin,x);
+							 xuat_DSHK_macb(l_ve,x);
+							break;
+						}
+					}
+				}while(l_chon!=27);
+			}
+			case 5:{
+				return;
+				break;
+			}
+		}
+	}while(chon!=27);
+}
 void menu_cb(List_mb &l_mb,ListCB &l_cb){
 	int chon;
 	  do
@@ -551,8 +617,9 @@ void menu_cb(List_mb &l_mb,ListCB &l_cb){
 	   }
 	  } while (chon!=27);
 }
-void menu_chinh(List_mb &l_mb,ListCB &l_cb){
+void menu_chinh(List_mb &l_mb,ListCB &l_cb,List_hk &l_hk,List_ve &l_ve){
 	int chon;
+	KhoiTaoCay(l_hk);
 	  do
 	  {
 	    
@@ -568,16 +635,12 @@ void menu_chinh(List_mb &l_mb,ListCB &l_cb){
 			break;
 		} ;
 	    case 3: {
-	    	xuat_ds_cb(l_cb);
+	    	menu_hk(l_cb, l_hk,l_ve);
 		      break;
 		    };
-		case 4: { 	gotoxy(cot-30,dong);
-	    	cout<<"NHAP SO HIEU MAY BAY CAN XOA";
-	    	string ma;
-	    	khung(cot+10,dong);
-	    	gotoxy(cot+20,dong);
-	    	getline(cin,ma);
-					xoa_cb(l_cb,ma);
+		case 4: { 
+			hanhKhach hk= nhap_hk(l_hk);
+			InsertHanhKhach(l_hk,hk);
 		      break;
 		    };    
 	    case 5:  break;

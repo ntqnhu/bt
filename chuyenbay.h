@@ -203,7 +203,7 @@ chuyenBay nhap_cb(ListCB &l_cb,List_mb &l_mb){
 	while(ktra_chuoi(p.san_bay_den)==0){
 	 	gotoxy(x+40,y+16);
 	 	cout<"                      ";
-		gotoxy(x,y);
+		gotoxy(x-5,y+16);
 		cout<<"NHAP SAN BAY DEN:";
 		gotoxy(x+40,y+16);
 		getline(cin,p.san_bay_den);
@@ -242,6 +242,7 @@ void xoa_cb(ListCB &listcb, string ma){
 		delete q;	
 	}
 }
+
 void xuat_ds_cb(ListCB listcb){
 	NODECB *p;
 	p=listcb.pHead;
